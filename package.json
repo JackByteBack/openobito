@@ -1,0 +1,23 @@
+{
+  "name": "@openobito/jack",
+  "version": "1.0.0",
+  "description": "A tool that user Control with terminal using text input and control local ai models",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackByteBack/openobito.git"
+  },
+  "keywords": [
+    "openobito",
+    "jack"
+  ],
+  "author": "JackByteBack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JackByteBack/openobito/issues"
+  },
+  "homepage": "https://github.com/JackByteBack/openobito#readme"
+}
