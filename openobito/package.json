@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Your local AI agent. Safe, smart, always offline.",
   "type": "module",
-  "license": "MIT",
+  "license": "EPL-2.0",
   "author": "OpenAgent Contributors",
   "homepage": "https://github.com/openagent-dev/openagent",
   "repository": {
