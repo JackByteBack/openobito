@@ -1,0 +1,15 @@
+src/
+test/
+scripts/build.js
+scripts/*.ts
+*.test.ts
+*.test.js
+tsconfig*.json
+esbuild.config.js
+.eslintrc*
+.prettierrc*
+.gitignore
+.github/
+.vscode/
+*.map
+node_modules/

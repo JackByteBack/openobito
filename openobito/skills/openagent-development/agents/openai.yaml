@@ -1,0 +1,7 @@
+interface:
+  display_name: "OpenAgent Development"
+  short_description: "Build and review OpenAgent changes"
+  default_prompt: "Use $openagent-development to implement a focused OpenAgent code change with tests."
+policy:
+  allow_implicit_invocation: true
+

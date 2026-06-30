@@ -1,0 +1,39 @@
+name: Build Releases
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            target: node18-win-x64
+            output: openagent.exe
+          - os: macos-latest
+            target: node18-macos-x64
+            output: openagent-macos
+          - os: ubuntu-latest
+            target: node18-linux-x64
+            output: openagent-linux
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npx pkg . --targets ${{ matrix.target }} --output ${{ matrix.output }}
+        continue-on-error: true
+
+      - uses: softprops/action-gh-release@v2
+        if: success()
+        with:
+          files: ${{ matrix.output }}
+          generate_release_notes: true

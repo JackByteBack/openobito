@@ -1,0 +1,61 @@
+# OpenAgent Skill Registry
+# All skills discoverable via /skills list
+# Format: name, path, category, risk, tags
+
+version: 1
+skills:
+  - name: git-workflow
+    path: skills/git/git-workflow/SKILL.md
+    category: git
+    risk: medium
+    tags: [git, branch, commit, pull-request, workflow]
+    description: "Full Git development cycle: branch, commit, PR."
+
+  - name: refactor
+    path: skills/coding/refactor/SKILL.md
+    category: software-development
+    risk: medium
+    tags: [refactor, typescript, clean-code, tests]
+    description: "Safe, incremental code refactoring with tests-first discipline."
+
+  - name: web-research
+    path: skills/research/web-research/SKILL.md
+    category: research
+    risk: low
+    tags: [research, web, search, citations]
+    description: "Structured web research with citations."
+
+  - name: documentation
+    path: skills/writing/documentation/SKILL.md
+    category: writing
+    risk: low
+    tags: [documentation, readme, api-docs, tsdoc]
+    description: "Technical documentation: READMEs, API docs, ADRs."
+
+  - name: root-cause
+    path: skills/debugging/root-cause/SKILL.md
+    category: debugging
+    risk: low
+    tags: [debugging, root-cause, bisect, hypothesis]
+    description: "Root-cause analysis: reproduce, bisect, hypothesize, verify."
+
+  - name: security-audit
+    path: skills/security/security-audit/SKILL.md
+    category: security
+    risk: low
+    tags: [security, owasp, audit, vulnerabilities]
+    description: "OWASP top 10 audit, dependency scanning, credential leak scan."
+
+  - name: unit-tests
+    path: skills/testing/unit-tests/SKILL.md
+    category: testing
+    risk: low
+    tags: [testing, unit-tests, vitest, mocks, coverage]
+    description: "Write fast, isolated unit tests with Vitest."
+
+  - name: code-review
+    path: skills/productivity/code-review/SKILL.md
+    category: productivity
+    risk: low
+    tags: [code-review, quality, correctness, safety, readability]
+    description: "Structured 4-dimension code review."

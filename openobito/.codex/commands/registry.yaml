@@ -1,0 +1,238 @@
+# OpenAgent Slash Command Registry
+# All slash commands discoverable via /help
+# Format: command, handler, description, aliases, args
+
+version: 1
+commands:
+  - command: /help
+    handler: HelpMixin
+    description: "Show available commands and usage"
+    aliases: [/h, /?, /??]
+    args: "[command]"
+
+  - command: /clear
+    handler: AgentMixin
+    description: "Clear the current session transcript"
+    aliases: []
+    args: ""
+
+  - command: /new
+    handler: SessionMixin
+    description: "Start a new chat session"
+    aliases: [/n]
+    args: ""
+
+  - command: /reset
+    handler: SessionMixin
+    description: "Clear current session"
+    aliases: []
+    args: ""
+
+  - command: /model
+    handler: ModelMixin
+    description: "Show, switch, or manage Ollama models"
+    aliases: [/m]
+    args: "[name|list|download|remove|default|fallback|info|pull]"
+
+  - command: /skills
+    handler: SkillsMixin
+    description: "List, use, create, and manage skills"
+    aliases: [/s]
+    args: "list | use | info | create | improve | rate | delete | search | hub | install"
+
+  - command: /agent
+    handler: AgentMixin
+    description: "List and run agent workflow definitions"
+    aliases: []
+    args: "list | info <name> | run <name>"
+
+  - command: /session
+    handler: SessionMixin
+    description: "Session management (use /sessions to list)"
+    aliases: []
+    args: "list | load <id> | save [name] | delete <id> | rename <id> <name>"
+
+  - command: /history
+    handler: HistoryMixin
+    description: "Show, search, clear, or export conversation history"
+    aliases: []
+    args: "show [--limit N] | search <query> | clear | export [--id <id>]"
+
+  - command: /memory
+    handler: MemoryMixin
+    description: "Show, search, or clear the agent's memory store"
+    aliases: [/mem]
+    args: "list | search | semantic | add | clear | export | compress"
+
+  - command: /context
+    handler: MemoryMixin
+    description: "Manage agent context window settings"
+    aliases: [/ctx]
+    args: "load | add | project | limit | strategy"
+
+  - command: /safety
+    handler: SafetyMixin
+    description: "Show safety system status, policy, and audit log"
+    aliases: []
+    args: "status | policy | audit [--last N] | check <tool>"
+
+  - command: /cron
+    handler: CronMixin
+    description: "Manage scheduled cron jobs"
+    aliases: []
+    args: "list | add <expr> <prompt> | remove <id> | pause <id> | resume <id> | run <id> | history"
+
+  - command: /tools
+    handler: ToolsMixin
+    description: "List, inspect, and control tool execution"
+    aliases: []
+    args: "list | info <name> | enable <name> | disable <name> | audit"
+
+  - command: /git
+    handler: GitMixin
+    description: "Git operations: status, log, diff, branch, commit, push, pull"
+    aliases: []
+    args: "status | log | diff | branch | checkout | commit | push | pull"
+
+  - command: /file
+    handler: FileMixin
+    description: "File system operations: list, search, read"
+    aliases: []
+    args: "list | search | read | project | project detect | project structure"
+
+  - command: /config
+    handler: ConfigMixin
+    description: "Show or update configuration settings"
+    aliases: []
+    args: "show [--json] | set <key> <value> | get <key> | reset | edit | validate"
+
+  - command: /health
+    handler: HealthMixin
+    description: "Run system health diagnostics"
+    aliases: []
+    args: "[check|memory|disk]"
+
+  - command: /doctor
+    handler: HealthMixin
+    description: "Run full doctor diagnostics with repair suggestions"
+    aliases: []
+    args: "diagnose | repair | logs"
+
+  - command: /bench
+    handler: HealthMixin
+    description: "Benchmark model inference speed"
+    aliases: []
+    args: "model"
+
+  - command: /debug
+    handler: DebugMixin
+    description: "Toggle debug mode or trace logging"
+    aliases: []
+    args: "[on|off|trace]"
+
+  - command: /profile
+    handler: DebugMixin
+    description: "Show Node.js runtime profile"
+    aliases: []
+    args: ""
+
+  - command: /exit
+    handler: ExitMixin
+    description: "Exit OpenAgent"
+    aliases: [/quit, /q]
+    args: ""
+
+  - command: /rollback
+    handler: RollbackMixin
+    description: "Rollback to a previous conversation state"
+    aliases: []
+    args: "[diff]"
+
+  - command: /snapshot
+    handler: RollbackMixin
+    description: "Create, restore, or prune conversation snapshots"
+    aliases: []
+    args: "create | restore | prune"
+
+  - command: /personality
+    handler: PersonalityMixin
+    description: "Set the agent's personality, style, tone, or theme"
+    aliases: []
+    args: "[adaptive|creative|precise|balanced|witty|philosophical|zen]"
+
+  - command: /theme
+    handler: PersonalityMixin
+    description: "Set the TUI color theme"
+    aliases: []
+    args: "[light|dark|ocean|sunset|forest|midnight]"
+
+  - command: /usage
+    handler: UsageMixin
+    description: "Show token usage statistics and insights"
+    aliases: []
+    args: ""
+
+  - command: /stats
+    handler: UsageMixin
+    description: "Show session statistics"
+    aliases: []
+    args: ""
+
+  - command: /exec
+    handler: ToolsMixin
+    description: "Execute a shell command directly"
+    aliases: []
+    args: "[--safe|--timeout <s>|--dry-run] <command>"
+
+  - command: /integrate
+    handler: IntegrationsMixin
+    description: "Manage external integrations"
+    aliases: []
+    args: "list | add <name>"
+
+  - command: /stop
+    handler: AgentMixin
+    description: "Stop the agent mid-response"
+    aliases: []
+    args: ""
+
+  - command: /think
+    handler: AgentMixin
+    description: "Ask the agent to think before replying"
+    aliases: []
+    args: "[seconds]"
+
+  - command: /edit
+    handler: MessagesMixin
+    description: "Edit the last message"
+    aliases: []
+    args: "<new-text>"
+
+  - command: /delete
+    handler: MessagesMixin
+    description: "Delete a message by index"
+    aliases: []
+    args: "<index>"
+
+  - command: /pin
+    handler: MessagesMixin
+    description: "Pin a message to the context window"
+    aliases: []
+    args: "<index>"
+
+  - command: /summarize
+    handler: MessagesMixin
+    description: "Summarize the current session"
+    args: ""
+
+  - command: /backup
+    handler: BackupMixin
+    description: "Create, list, restore, delete, or prune backups"
+    aliases: []
+    args: "create [name] | list | restore <id> | delete <id> | prune [N]"
+
+  - command: /plugins
+    handler: PluginsMixin
+    description: "List, install, and manage plugins"
+    aliases: []
+    args: "list | install <name> | uninstall <name> | info <name> | enable <name> | disable <name>"

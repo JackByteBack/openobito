@@ -1,0 +1,203 @@
+# OpenAgent CLI Configuration
+# Copy this file to cli-config.yaml and customize for your environment.
+# All settings have defaults — only override what you need.
+
+# ─────────────────────────────────────────────────────────────
+# Core
+# ─────────────────────────────────────────────────────────────
+
+core:
+  # Default Ollama model to use
+  model: llama3.2
+
+  # Ollama API endpoint
+  ollama_url: http://localhost:11434
+
+  # Maximum tokens per request
+  max_tokens: 4096
+
+  # Temperature (0.0 = deterministic, 1.0 = creative)
+  temperature: 0.7
+
+  # Request timeout in milliseconds
+  timeout_ms: 30000
+
+# ─────────────────────────────────────────────────────────────
+# Safety
+# ─────────────────────────────────────────────────────────────
+
+safety:
+  # Security level: strict | standard | relaxed
+  # strict:   Asks for approval on any write/network operation
+  # standard: Asks for approval on destructive/network operations only
+  # relaxed:  Runs most operations without asking (not recommended)
+  level: standard
+
+  # Autonomy tier: readonly | supervised | full
+  # readonly:   Agent can only read files and run safe commands
+  # supervised: Agent asks before destructive or irreversible actions
+  # full:       Agent runs all steps without approval gates
+  autonomy: supervised
+
+  # Maximum file size the agent can read (bytes)
+  max_read_bytes: 10485760  # 10 MB
+
+  # Directories the agent is blocked from accessing (in addition to defaults)
+  blocked_directories:
+    - /etc/ssh
+    - /var/log/auth.log
+
+  # Additional protected paths (agent will ask before modifying)
+  protected_paths:
+    - ~/.ssh
+    - ~/.gnupg
+
+  # Rate limits (requests per window)
+  rate_limits:
+    commands_per_minute: 60
+    commands_per_hour: 500
+    file_writes_per_minute: 20
+    network_requests_per_minute: 10
+
+  # Audit log location (defaults to ~/.openagent/audit_logs/)
+  # audit_log_dir: ~/.openagent/audit_logs
+
+# ─────────────────────────────────────────────────────────────
+# Tools
+# ─────────────────────────────────────────────────────────────
+
+tools:
+  # Per-tool policy overrides
+  # action: allow | prompt | deny
+  policy:
+    read_file: allow
+    write_file: prompt
+    shell_exec: prompt
+    web_fetch: prompt
+    git_commit: prompt
+    git_push: prompt
+    process_kill: deny      # Never allow killing processes
+
+  # Tools hidden from the LLM's tool list (still usable by workflows)
+  # hidden: []
+
+# ─────────────────────────────────────────────────────────────
+# Skills
+# ─────────────────────────────────────────────────────────────
+
+skills:
+  # Directory containing skill definitions (relative to project root)
+  directory: skills/
+
+  # Codex registry file
+  registry: .codex/skills/registry.yaml
+
+  # Automatically load skills matching these tags when starting a session
+  # auto_load_tags: []
+
+# ─────────────────────────────────────────────────────────────
+# Agents
+# ─────────────────────────────────────────────────────────────
+
+agents:
+  # Directory containing agent workflow definitions
+  directory: .agents/agents/
+
+  # Maximum steps per workflow before forcing a stop
+  max_steps: 100
+
+  # Circuit breaker thresholds
+  circuit_breakers:
+    repeat_failure_threshold: 3   # Same step fails N times → stop
+    no_progress_threshold: 6      # N steps with no output → stop
+
+# ─────────────────────────────────────────────────────────────
+# Cron
+# ─────────────────────────────────────────────────────────────
+
+cron:
+  # Enable the cron scheduler
+  enabled: true
+
+  # Cron database location
+  db_path: ~/.openagent/cron.db
+
+  # Maximum concurrent cron jobs
+  max_concurrent: 3
+
+  # Default timeout for cron jobs (ms)
+  job_timeout_ms: 300000  # 5 minutes
+
+# ─────────────────────────────────────────────────────────────
+# Context Compression
+# ─────────────────────────────────────────────────────────────
+
+compression:
+  # Enable automatic context compression when approaching token limit
+  enabled: true
+
+  # Compression strategy: sliding_window | summarize | hybrid
+  # sliding_window: Keep most recent N messages, drop older ones
+  # summarize:      Compress older messages into a summary block
+  # hybrid:         Summarize until within budget, then sliding window
+  strategy: hybrid
+
+  # Trigger compression when context reaches this fraction of max_tokens
+  trigger_fraction: 0.75
+
+  # Minimum messages to keep (even if over budget)
+  min_messages: 10
+
+  # For summarize/hybrid: max tokens for the summary block
+  summary_max_tokens: 512
+
+# ─────────────────────────────────────────────────────────────
+# Storage
+# ─────────────────────────────────────────────────────────────
+
+storage:
+  # Session database location
+  db_path: ~/.openagent/sessions.db
+
+  # Maximum sessions to retain
+  max_sessions: 100
+
+  # Session TTL in days (0 = never expire)
+  session_ttl_days: 30
+
+# ─────────────────────────────────────────────────────────────
+# UI / TUI
+# ─────────────────────────────────────────────────────────────
+
+ui:
+  # Show thinking / reasoning tokens from the model
+  show_thinking: false
+
+  # Show tool call details in the TUI
+  show_tool_calls: true
+
+  # Syntax highlight code blocks
+  syntax_highlight: true
+
+  # Theme: default | dark | light | minimal
+  theme: default
+
+  # Stream model output token-by-token (false = wait for full response)
+  stream: true
+
+# ─────────────────────────────────────────────────────────────
+# Logging
+# ─────────────────────────────────────────────────────────────
+
+logging:
+  # Log level: error | warn | info | debug
+  level: info
+
+  # Log file location (empty = stderr only)
+  # file: ~/.openagent/openagent.log
+
+  # Log format: text | json
+  format: text
+
+  # Rotate logs daily
+  rotate: true
